@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EnglishWordsApp</string>
+    <string name="button_skip">SKIP</string>
+    <string name="button_continue">Continue</string>
+</resources>
