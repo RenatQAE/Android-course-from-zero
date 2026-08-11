@@ -31,6 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvQuestionWord">
 
         <LinearLayout
+            android:id="@+id/layoutAnswer1"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/shape_rounded_conteiners"
@@ -38,6 +39,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tvVariantNumber1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="12dp"
@@ -49,6 +51,7 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
+                android:id="@+id/tvVariantValue1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -89,6 +92,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutAnswer3"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="18dp"
@@ -97,6 +101,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tvVariantNumber3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="12dp"
@@ -108,6 +113,7 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
+                android:id="@+id/tvVariantValue3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -150,13 +156,14 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnSkip"
         android:layout_width="310dp"
         android:layout_height="58dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="24dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="@string/button_skip"
         android:textAllCaps="true"
         android:backgroundTint="#2574FF"
@@ -177,6 +184,7 @@
         tools:ignore="HardcodedText" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#0EAD69"
@@ -184,10 +192,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_height="136dp">
+        tools:layout_height="136dp"
+        tools:visibility="gone">
+
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivResultIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
@@ -199,6 +209,7 @@
             app:layout_goneMarginTop="18dp" />
 
         <TextView
+            android:id="@+id/tvResultMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -207,12 +218,14 @@
             android:textSize="22sp"
             android:fontFamily="@font/nunito_light"
 
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+
+            app:layout_constraintBottom_toBottomOf="@+id/ivResultIcon"
+            app:layout_constraintStart_toEndOf="@+id/ivResultIcon"
+            app:layout_constraintTop_toTopOf="@+id/ivResultIcon"
             tools:ignore="HardcodedText" />
 
         <android.widget.Button
+            android:id="@+id/btnContinue"
             android:layout_width="310dp"
             android:layout_height="58dp"
             android:background="@drawable/shape_button_footer"
@@ -227,7 +240,7 @@
             android:text="@string/button_continue"
             android:textAllCaps="true"
             android:fontFamily="@font/nunito_light"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/ivResultIcon"
              />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

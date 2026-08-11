@@ -2,4 +2,6 @@
     <string name="app_name">EnglishWordsApp</string>
     <string name="button_skip">SKIP</string>
     <string name="button_continue">Continue</string>
+    <string name="title_correct">Currect!</string>
+    <string name="title_wrong">Wrong!</string>
 </resources>
