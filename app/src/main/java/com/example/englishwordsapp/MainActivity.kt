@@ -3,6 +3,7 @@ package com.example.englishwordsapp
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         get() = _binding ?: throw IllegalArgumentException("Binding for Activity must be not null")
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLearnWordBinding.inflate(layoutInflater)
@@ -27,163 +27,168 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.layoutAnswer3.setOnClickListener {
-            markAnswerCorrect()
+            markAnswerCorrect(
+                binding.layoutAnswer3,
+                binding.tvVariantNumber3,
+                binding.tvVariantValue3
+            )
+            showResultMessage(true)
         }
-         binding.layoutAnswer1.setOnClickListener {
-             markAnswerWrong()
-         }
+        binding.layoutAnswer1.setOnClickListener {
+            markAnswerWrong(
+                binding.layoutAnswer1,
+                binding.tvVariantNumber1,
+                binding.tvVariantValue1
+            )
+            showResultMessage(false)
+        }
 
         binding.btnContinue.setOnClickListener {
-            markAnswerNeutral()
+            markAnswerNeutral(
+                binding.layoutAnswer1,
+                binding.tvVariantNumber1,
+                binding.tvVariantValue1
+            )
+            markAnswerNeutral(
+                binding.layoutAnswer3,
+                binding.tvVariantNumber3,
+                binding.tvVariantValue3
+            )
         }
-
-
-
-
-//        with(binding){
-//            tvQuestionWord.text = "AndroidSprint"
-//            tvQuestionWord.setTextColor(Color.GRAY)
-//            imageButton.isVisible = false
-//        }
-
-   //binding.tvQuestionWord.text = "AndroidSprint"
-        //findViewById
-        //ViewBinding
-
-//        val tvQuestionWord: TextView = findViewById(R.id.tvQuestionWord)
-//        tvQuestionWord.text = "42"
-//        tvQuestionWord.setTextColor(Color.parseColor("#FDD600"))
-//        tvQuestionWord.setTextColor(ContextCompat.getColor(this,R.color.black))
-//
-
 
 
     }
 
-    private fun markAnswerNeutral() {
-        with(binding) {
-            for (layout in listOf(layoutAnswer1, layoutAnswer3)) {
-                layout.background = ContextCompat.getDrawable(
+    private fun markAnswerNeutral(
+        layoutAnswer: LinearLayout,
+        tvVariantNumber: TextView,
+        tvVariantValue: TextView,
+    ) {
+
+        layoutAnswer.background = ContextCompat.getDrawable(
+            this@MainActivity,
+            R.drawable.shape_rounded_conteiners
+        )
+
+        tvVariantValue.setTextColor(
+            ContextCompat.getColor(
+                this@MainActivity,
+                R.color.textVariantsColor
+            )
+        )
+
+        tvVariantNumber.apply {
+            background = ContextCompat.getDrawable(
+                this@MainActivity,
+                R.drawable.shape_rounded_variants,
+            )
+            setTextColor(
+                ContextCompat.getColor(
                     this@MainActivity,
-                    R.drawable.shape_rounded_conteiners
+                    R.color.textVariantsColor
                 )
-            }
-            for (textView in listOf(tvVariantValue1,tvVariantValue3)){
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        this@MainActivity,
-                        R.color.textVariantsColor
-                    )
-                )
-            }
-            for (texView in listOf(tvVariantNumber1,tvVariantNumber3)){
-                texView.apply {
-                    background = ContextCompat.getDrawable(
-                        this@MainActivity,
-                        R.drawable.shape_rounded_variants,
-                    )
-                    setTextColor(
-                        ContextCompat.getColor(
-                            this@MainActivity,
-                            R.color.textVariantsColor
-                        )
-                    )
-                }
-            }
-            layoutResult.isVisible = false
-            btnSkip.isVisible = true
+            )
         }
     }
 
 
-    private fun markAnswerWrong() {
-        binding.layoutAnswer1.background = ContextCompat.getDrawable(
-            this@MainActivity,
-            R.drawable.shape_rounded_conteiners_wrong
-        )
-        binding.tvVariantNumber1.background = ContextCompat.getDrawable(
-            this@MainActivity,
-            R.drawable.shape_rounded_variants_wrong
-        )
-        binding.tvVariantNumber1.setTextColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.white
-            )
-        )
-        binding.tvVariantValue1.setTextColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.wrongAnswerColor
-            )
-        )
-        binding.btnSkip.isVisible = false
-        binding.layoutResult.setBackgroundColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.wrongAnswerColor
-            )
-        )
 
-        binding.btnContinue.setTextColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.wrongAnswerColor
-            )
+
+private fun markAnswerWrong(
+    layoutAnswer: LinearLayout,
+    tvVariantNumber: TextView,
+    tvVariantValue: TextView,
+) {
+    layoutAnswer.background = ContextCompat.getDrawable(
+        this@MainActivity,
+        R.drawable.shape_rounded_conteiners_wrong
+    )
+    tvVariantNumber.background = ContextCompat.getDrawable(
+        this@MainActivity,
+        R.drawable.shape_rounded_variants_wrong
+    )
+    tvVariantNumber.setTextColor(
+        ContextCompat.getColor(
+            this@MainActivity,
+            R.color.white
         )
-        binding.ivResultIcon.setImageDrawable(
-            ContextCompat.getDrawable(
+    )
+    tvVariantValue.setTextColor(
+        ContextCompat.getColor(
+            this@MainActivity,
+            R.color.wrongAnswerColor
+        )
+    )
+    binding.btnSkip.isVisible = false
+    binding.layoutResult.setBackgroundColor(
+        ContextCompat.getColor(
+            this@MainActivity,
+            R.color.wrongAnswerColor
+        )
+    )
+
+    binding.btnContinue.setTextColor(
+        ContextCompat.getColor(
+            this@MainActivity,
+            R.color.wrongAnswerColor
+        )
+    )
+    binding.ivResultIcon.setImageDrawable(
+        ContextCompat.getDrawable(
             this@MainActivity,
             R.drawable.ic_wrong
-        ))
-        binding.tvResultMessage.text = resources.getString(R.string.title_wrong)
-    }
+        )
+    )
+    binding.tvResultMessage.text = resources.getString(R.string.title_wrong)
+}
 
-    private fun markAnswerCorrect() {
-        binding.layoutAnswer3.background = ContextCompat.getDrawable(
+private fun markAnswerCorrect(
+    layoutAnswer: LinearLayout,
+    tvVariantNumber: TextView,
+    tvVariantValue: TextView,
+) {
+    layoutAnswer.background = ContextCompat.getDrawable(
+        this@MainActivity,
+        R.drawable.shape_rounded_conteiners_correct
+    )
+    tvVariantNumber.background = ContextCompat.getDrawable(
+        this@MainActivity,
+        R.drawable.shape_rounded_variants_correct
+    )
+    tvVariantNumber.setTextColor(
+        ContextCompat.getColor(
             this@MainActivity,
-            R.drawable.shape_rounded_conteiners_correct
+            R.color.white
         )
-        binding.tvVariantNumber3.background = ContextCompat.getDrawable(
+    )
+    tvVariantValue.setTextColor(
+        ContextCompat.getColor(
             this@MainActivity,
-            R.drawable.shape_rounded_variants_correct
+            R.color.correctAnswerColor
         )
-        binding.tvVariantNumber3.setTextColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.white
-            )
-        )
-        binding.tvVariantValue3.setTextColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.correctAnswerColor
-            )
-        )
-        binding.btnSkip.isVisible = false
-        binding.layoutResult.setBackgroundColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.correctAnswerColor
-            )
-        )
-        binding.ivResultIcon.setImageDrawable(
-            ContextCompat.getDrawable(
-                this@MainActivity,
-                R.drawable.ic_correct
-            )
-        )
-        binding.tvResultMessage.text = resources.getString(R.string.title_correct)
+    )
+}
+    private fun showResultMessage(isCurrect: Boolean){
+        val color: Int
+        val messageText: String
+        val resultIconResourse: Int
+        if(isCurrect){
+            color = ContextCompat.getColor(this,R.color.correctAnswerColor)
+            resultIconResourse = R.drawable.ic_correct
+            messageText = "Currect!"
+        }else {
+            color = ContextCompat.getColor(this,R.color.wrongAnswerColor)
+            resultIconResourse = R.drawable.ic_wrong
+            messageText = "Wrong!"
 
-        binding.btnContinue.setTextColor(
-            ContextCompat.getColor(
-                this@MainActivity,
-                R.color.correctAnswerColor
-            )
-        )
-        binding.layoutResult.isVisible = true
+        }
+        with(binding){
+            btnSkip.isVisible = false
+            layoutResult.isVisible = true
+            btnContinue.setTextColor(color)
+            layoutResult.setBackgroundColor(color)
+            tvResultMessage.text = messageText
+            ivResultIcon.setImageResource(resultIconResourse)
+        }
     }
-
-
-
 }
